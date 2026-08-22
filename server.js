@@ -1,8 +1,32 @@
-// Listar todos os cursos
+// Listar todos os cursos (com suporte a filtros por query params)
 app.get('/api/courses', (req, res) => {
-    res.status(200).json({
+    let result = [...courses];
+    const { q, area, institution, mode } = req.query;
+
+    if (q) {
+        const query = q.toLowerCase();
+        result = result.filter(c => 
+            c.title.toLowerCase().includes(query) || 
+            c.description.toLowerCase().includes(query)
+        );
+    }
+
+    if (area) {
+        result = result.filter(c => c.area.toLowerCase() === area.toLowerCase());
+    }
+
+    if (institution) {
+        result = result.filter(c => c.institution.toLowerCase().includes(institution.toLowerCase()));
+    }
+
+    if (mode) {
+        result = result.filter(c => c.mode.toLowerCase() === mode.toLowerCase());
+    }
+
+    return res.status(200).json({
         success: true,
-        courses: courses
+        count: result.length,
+        data: result
     });
 });
 
