@@ -70,7 +70,7 @@ const institutions = [
 ];
 
 const articles = [
-    ['🎓', 'Como escolher um curso gratuito que realmente ajuda no currículo', 'Compare instituição, conteúdo, carga horária e certificado.', '5 min'],
+    ['Como escolher um curso gratuito que realmente ajuda no currículo', 'Compare instituição, conteúdo, carga horária e certificado.', '5 min'],
     ['📄', 'Certificado online: o que observar antes de se inscrever', 'Veja os principais pontos para conferir antes da inscrição.', '4 min'],
     ['🔎', 'Como encontrar oportunidades antes que o prazo termine', 'Estratégias para acompanhar prazos e novas oportunidades.', '6 min'],
     ['💻', 'Como começar na tecnologia com cursos gratuitos', 'Um caminho inicial por áreas e competências.', '7 min'],
