@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const { courses } = require('./courses');
+const coursesData = require('./courses');
 
 const app = express();
 
@@ -10,6 +10,16 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
+// Aceita tanto:
+// module.exports = { courses }
+// quanto:
+// module.exports = [...]
+const courses = Array.isArray(coursesData)
+    ? coursesData
+    : Array.isArray(coursesData.courses)
+        ? coursesData.courses
+        : [];
+
 // Página inicial
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -17,9 +27,11 @@ app.get('/', (req, res) => {
         message: 'API EduRadar funcionando!',
         version: '1.0.0',
         status: 'online',
+        totalCourses: courses.length,
         endpoints: {
             courses: '/api/courses',
-            courseById: '/api/courses/:id'
+            courseById: '/api/courses/:id',
+            health: '/health'
         }
     });
 });
@@ -28,18 +40,17 @@ app.get('/', (req, res) => {
 app.get('/health', (req, res) => {
     res.status(200).json({
         status: 'ok',
-        service: 'EduRadar API'
+        service: 'EduRadar API',
+        courses: courses.length
     });
 });
 
 // Listar todos os cursos
 app.get('/api/courses', (req, res) => {
-    console.log('Cursos:', courses);
-
     res.status(200).json({
         success: true,
-        total: Array.isArray(courses) ? courses.length : 0,
-        courses: Array.isArray(courses) ? courses : []
+        total: courses.length,
+        courses: courses
     });
 });
 
@@ -49,6 +60,7 @@ app.get('/api/courses/:id', (req, res) => {
 
     if (Number.isNaN(id)) {
         return res.status(400).json({
+            success: false,
             error: 'ID do curso inválido'
         });
     }
@@ -57,21 +69,28 @@ app.get('/api/courses/:id', (req, res) => {
 
     if (!course) {
         return res.status(404).json({
+            success: false,
             error: 'Curso não encontrado'
         });
     }
 
-    res.status(200).json(course);
+    res.status(200).json({
+        success: true,
+        course: course
+    });
 });
 
 // Rota não encontrada
 app.use((req, res) => {
     res.status(404).json({
+        success: false,
         error: 'Rota não encontrada',
         path: req.originalUrl
     });
 });
 
+// Iniciar servidor
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`EduRadar API rodando na porta ${PORT}`);
+    console.log(`Cursos carregados: ${courses.length}`);
 });
