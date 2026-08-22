@@ -34,7 +34,13 @@ app.get('/health', (req, res) => {
 
 // Listar todos os cursos
 app.get('/api/courses', (req, res) => {
-    res.status(200).json(courses);
+    console.log('Cursos:', courses);
+
+    res.status(200).json({
+        success: true,
+        total: Array.isArray(courses) ? courses.length : 0,
+        courses: Array.isArray(courses) ? courses : []
+    });
 });
 
 // Buscar curso por ID
