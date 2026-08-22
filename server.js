@@ -1,3 +1,12 @@
+// Listar todos os cursos
+app.get('/api/courses', (req, res) => {
+    res.status(200).json({
+        success: true,
+        courses: courses
+    });
+});
+
+// Buscar curso por ID
 app.get('/api/courses/:id', (req, res) => {
     const id = Number(req.params.id);
 
