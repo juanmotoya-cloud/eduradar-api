@@ -48,5 +48,37 @@
       "views": 760,
       "linkInscricao": "https://exemplo.com/inscricao"
     }
+  ],
+  "categories": [
+    ["💻", "Tecnologia", "Programação, informática, dados e ferramentas digitais."],
+    ["📊", "Administração", "Gestão, atendimento, escritório e carreira."],
+    ["🗣️", "Idiomas", "Inglês, espanhol e outros idiomas."],
+    ["🏭", "Indústria", "Cursos técnicos e qualificação profissional."],
+    ["🏥", "Saúde", "Capacitação e formação na área da saúde."],
+    ["💰", "Finanças", "Educação financeira, negócios e mercado."],
+    ["📚", "Educação", "Ensino, comunicação e desenvolvimento."],
+    ["🌱", "Meio Ambiente", "Sustentabilidade e novas tecnologias."]
+  ],
+  "institutions": [
+    ["IF", "Institutos Federais", "420 oportunidades"],
+    ["SN", "SENAI", "180 oportunidades"],
+    ["SC", "SENAC", "150 oportunidades"],
+    ["FG", "FGV Online", "90 oportunidades"],
+    ["EV", "Escola Virtual", "210 oportunidades"],
+    ["UF", "Universidades", "300 oportunidades"]
+  ],
+  "articles": [
+    ["🎓", "Como escolher um curso gratuito que realmente ajuda no currículo", "Compare instituição, conteúdo, carga horária e certificado.", "5 min"],
+    ["📄", "Certificado online: o que observar antes de se inscrever", "Veja os principais pontos para conferir antes da inscrição.", "4 min"],
+    ["🔎", "Como encontrar oportunidades antes que o prazo termine", "Estratégias para acompanhar prazos e novas oportunidades.", "6 min"],
+    ["💻", "Como começar na tecnologia com cursos gratuitos", "Um caminho inicial por áreas e competências.", "7 min"],
+    ["📚", "Como organizar seus estudos online", "Planejamento simples para aproveitar melhor cursos EAD.", "5 min"],
+    ["🚀", "Como usar cursos para melhorar o currículo", "Como apresentar capacitações de forma clara.", "4 min"]
+  ],
+  "ads": [
+    { "id": 1, "name": "Banner topo — Educação", "position": "leaderboard", "pages": "Todas", "status": true, "impressions": 12450, "clicks": 384 },
+    { "id": 2, "name": "Sidebar — Curso em destaque", "position": "sidebar", "pages": "Cursos", "status": true, "impressions": 8240, "clicks": 201 },
+    { "id": 3, "name": "Entre oportunidades", "position": "inline", "pages": "Cursos/Categorias", "status": true, "impressions": 6320, "clicks": 112 },
+    { "id": 4, "name": "Artigo — meio do conteúdo", "position": "article", "pages": "Conteúdos", "status": false, "impressions": 3100, "clicks": 42 }
   ]
 }
