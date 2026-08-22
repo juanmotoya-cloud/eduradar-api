@@ -1,54 +1,50 @@
-let courses = [
-    {
-        id: 1,
-        title: 'Inglês e espanhol online com certificado gratuito',
-        area: 'Idiomas',
-        category: 'idiomas',
-        institution: 'IFSul',
-        hours: '180h',
-        mode: 'Online',
-        certificate: 'Certificado',
-        deadline: '23/08/2026',
-        status: 'Destaque',
-        code: 'EN',
-        description: 'Curso gratuito e 100% online para desenvolver competências em idiomas.',
-        views: 1800,
-        linkInscricao: 'https://onlinecursosgratuitos.com.br/'
-    },
-    {
-        id: 2,
-        title: 'Excel básico e intermediário para o mercado de trabalho',
-        area: 'Tecnologia',
-        category: 'ead',
-        institution: 'Escola Virtual',
-        hours: '40h',
-        mode: 'Online',
-        certificate: 'Certificado',
-        deadline: '30/08/2026',
-        status: 'Novo',
-        code: 'EX',
-        description: 'Capacitação voltada para planilhas, fórmulas, organização de dados e produtividade profissional.',
-        views: 1200,
-        linkInscricao: 'https://exemplo.com/inscricao'
-    },
-    {
-        id: 3,
-        title: 'Fundamentos de Segurança do Trabalho',
-        area: 'Indústria',
-        category: 'tecnicos',
-        institution: 'IFSP',
-        hours: '40h',
-        mode: 'Online',
-        certificate: 'Certificado',
-        deadline: '18/09/2026',
-        status: 'Novo',
-        code: 'ST',
-        description: 'Introdução aos principais conceitos de prevenção e segurança no ambiente profissional.',
-        views: 760,
-        linkInscricao: 'https://exemplo.com/inscricao'
-    }
-];
-
-let nextId = 4;
-
-module.exports = { courses, nextId };
+[
+  {
+    "id": 1,
+    "title": "Inglês e espanhol online com certificado gratuito",
+    "area": "Idiomas",
+    "category": "idiomas",
+    "institution": "IFSul",
+    "hours": "180h",
+    "mode": "Online",
+    "certificate": "Certificado",
+    "deadline": "23/08/2026",
+    "status": "Destaque",
+    "code": "EN",
+    "description": "Curso gratuito e 100% online para desenvolver competências em idiomas.",
+    "views": 1800,
+    "linkInscricao": "https://onlinecursosgratuitos.com.br/"
+  },
+  {
+    "id": 2,
+    "title": "Excel básico e intermediário para o mercado de trabalho",
+    "area": "Tecnologia",
+    "category": "ead",
+    "institution": "Escola Virtual",
+    "hours": "40h",
+    "mode": "Online",
+    "certificate": "Certificado",
+    "deadline": "30/08/2026",
+    "status": "Novo",
+    "code": "EX",
+    "description": "Capacitação voltada para planilhas, fórmulas, organização de dados e produtividade profissional.",
+    "views": 1200,
+    "linkInscricao": "https://exemplo.com/inscricao"
+  },
+  {
+    "id": 3,
+    "title": "Fundamentos de Segurança do Trabalho",
+    "area": "Indústria",
+    "category": "tecnicos",
+    "institution": "IFSP",
+    "hours": "40h",
+    "mode": "Online",
+    "certificate": "Certificado",
+    "deadline": "18/09/2026",
+    "status": "Novo",
+    "code": "ST",
+    "description": "Introdução aos principais conceitos de prevenção e segurança no ambiente profissional.",
+    "views": 760,
+    "linkInscricao": "https://exemplo.com/inscricao"
+  }
+]
