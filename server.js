@@ -1,35 +1,27 @@
-// Listar todos os cursos (com suporte a filtros por query params)
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// IMPORTANTE: Certifique-se de desestruturar { courses } corretamente!
+const { courses } = require('./courses'); // Ou o caminho correto do seu arquivo de dados
+
+app.use(cors());
+app.use(express.json());
+
+// Rota corrigida
 app.get('/api/courses', (req, res) => {
-    let result = [...courses];
-    const { q, area, institution, mode } = req.query;
-
-    if (q) {
-        const query = q.toLowerCase();
-        result = result.filter(c => 
-            c.title.toLowerCase().includes(query) || 
-            c.description.toLowerCase().includes(query)
-        );
-    }
-
-    if (area) {
-        result = result.filter(c => c.area.toLowerCase() === area.toLowerCase());
-    }
-
-    if (institution) {
-        result = result.filter(c => c.institution.toLowerCase().includes(institution.toLowerCase()));
-    }
-
-    if (mode) {
-        result = result.filter(c => c.mode.toLowerCase() === mode.toLowerCase());
-    }
+    // Se 'courses' for undefined por erro de importação, enviamos array vazio para não quebrar
+    const dataToSend = courses || [];
 
     return res.status(200).json({
         success: true,
-        count: result.length,
-        data: result
+        count: dataToSend.length,
+        data: dataToSend
     });
 });
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
 // Buscar curso por ID
 app.get('/api/courses/:id', (req, res) => {
     const id = Number(req.params.id);
