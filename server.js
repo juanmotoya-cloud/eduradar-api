@@ -2,23 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-const { courses } = require('./courses');
+const { courses, categories, institutions, articles, ads } = require('./courses');
 
 app.use(cors());
 app.use(express.json());
 
-// 1. Rota para listar todos os cursos
-app.get('/api/courses', (req, res) => {
-    const dataToSend = courses || [];
+// Listar todos os cursos
+app.get('/api/courses', (req, res) => res.json({ success: true, data: courses || [] }));
 
-    return res.status(200).json({
-        success: true,
-        count: dataToSend.length,
-        data: dataToSend
-    });
-});
-
-// 2. Rota para buscar curso por ID (colocada ANTES do app.listen)
+// Buscar curso por ID
 app.get('/api/courses/:id', (req, res) => {
     const id = Number(req.params.id);
 
@@ -45,6 +37,12 @@ app.get('/api/courses/:id', (req, res) => {
     });
 });
 
-// 3. Inicialização do servidor (deve ficar SEMPRE no final do arquivo)
+// Outros endpoints
+app.get('/api/categories', (req, res) => res.json({ success: true, data: categories || [] }));
+app.get('/api/institutions', (req, res) => res.json({ success: true, data: institutions || [] }));
+app.get('/api/articles', (req, res) => res.json({ success: true, data: articles || [] }));
+app.get('/api/ads', (req, res) => res.json({ success: true, data: ads || [] }));
+
+// Inicialização do servidor (apenas uma vez, ao final)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
