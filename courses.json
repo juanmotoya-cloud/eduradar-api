@@ -85,10 +85,7 @@ const ads = [
     { id: 4, name: 'Artigo — meio do conteúdo', position: 'article', pages: 'Conteúdos', status: false, impressions: 3100, clicks: 42 }
 ];
 
+// No final do seu arquivo de dados:
 module.exports = {
-    courses,
-    categories,
-    institutions,
-    articles,
-    ads
+    courses
 };
