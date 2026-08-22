@@ -2,15 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// IMPORTANTE: Certifique-se de desestruturar { courses } corretamente!
-const { courses } = require('./courses'); // Ou o caminho correto do seu arquivo de dados
+const { courses } = require('./courses');
 
 app.use(cors());
 app.use(express.json());
 
-// Rota corrigida
+// 1. Rota para listar todos os cursos
 app.get('/api/courses', (req, res) => {
-    // Se 'courses' for undefined por erro de importação, enviamos array vazio para não quebrar
     const dataToSend = courses || [];
 
     return res.status(200).json({
@@ -20,9 +18,7 @@ app.get('/api/courses', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
-// Buscar curso por ID
+// 2. Rota para buscar curso por ID (colocada ANTES do app.listen)
 app.get('/api/courses/:id', (req, res) => {
     const id = Number(req.params.id);
 
@@ -33,7 +29,8 @@ app.get('/api/courses/:id', (req, res) => {
         });
     }
 
-    const course = courses.find(course => course.id === id);
+    const courseList = courses || [];
+    const course = courseList.find(c => c.id === id);
 
     if (!course) {
         return res.status(404).json({
@@ -47,3 +44,7 @@ app.get('/api/courses/:id', (req, res) => {
         data: course
     });
 });
+
+// 3. Inicialização do servidor (deve ficar SEMPRE no final do arquivo)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
