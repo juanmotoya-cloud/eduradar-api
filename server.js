@@ -53,7 +53,6 @@ app.get('/api/courses', (req, res) => {
         courses: courses
     });
 });
-
 // Buscar curso por ID
 app.get('/api/courses/:id', (req, res) => {
     const id = Number(req.params.id);
