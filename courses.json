@@ -1,4 +1,4 @@
-const courses = [
+courses = [
     {
         "id": 1,
         "title": "Inglês e espanhol online com certificado gratuito",
