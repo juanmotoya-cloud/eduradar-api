@@ -11,23 +11,17 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 
-// ================================
-// HOME
-// ================================
-
+// TESTE DA API
 app.get('/', (req, res) => {
     res.json({
         success: true,
-        name: 'EduRadar API',
-        message: 'API funcionando corretamente'
+        message: 'EduRadar API funcionando',
+        courses: courses.length
     });
 });
 
 
-// ================================
-// LISTAR CURSOS
-// ================================
-
+// LISTAR
 app.get('/api/courses', (req, res) => {
     res.json({
         success: true,
@@ -37,43 +31,12 @@ app.get('/api/courses', (req, res) => {
 });
 
 
-// ================================
-// BUSCAR CURSO POR ID
-// ================================
-
-app.get('/api/courses/:id', (req, res) => {
-    const id = Number(req.params.id);
-
-    if (Number.isNaN(id)) {
-        return res.status(400).json({
-            success: false,
-            error: 'ID do curso inválido'
-        });
-    }
-
-    const course = courses.find(
-        course => Number(course.id) === id
-    );
-
-    if (!course) {
-        return res.status(404).json({
-            success: false,
-            error: 'Curso não encontrado'
-        });
-    }
-
-    res.json({
-        success: true,
-        data: course
-    });
-});
-
-
-// ================================
-// CADASTRAR CURSO
-// ================================
-
+// CADASTRAR
 app.post('/api/courses', (req, res) => {
+
+    console.log('POST /api/courses');
+    console.log('Dados recebidos:', req.body);
+
     const {
         title,
         area,
@@ -96,16 +59,16 @@ app.post('/api/courses', (req, res) => {
         });
     }
 
-    const newId = courses.length > 0
-        ? Math.max(...courses.map(course => Number(course.id))) + 1
+    const newId = courses.length
+        ? Math.max(...courses.map(c => Number(c.id))) + 1
         : 1;
 
     const newCourse = {
         id: newId,
-        title,
-        area,
+        title: title,
+        area: area,
         category: category || 'ead',
-        institution,
+        institution: institution,
         hours: hours || '',
         mode: mode || 'Online',
         certificate: certificate || 'Certificado',
@@ -119,7 +82,9 @@ app.post('/api/courses', (req, res) => {
 
     courses.push(newCourse);
 
-    res.status(201).json({
+    console.log('Curso criado:', newCourse);
+
+    return res.status(201).json({
         success: true,
         message: 'Curso cadastrado com sucesso',
         data: newCourse
@@ -127,19 +92,10 @@ app.post('/api/courses', (req, res) => {
 });
 
 
-// ================================
-// EDITAR CURSO
-// ================================
-
+// EDITAR
 app.put('/api/courses/:id', (req, res) => {
-    const id = Number(req.params.id);
 
-    if (Number.isNaN(id)) {
-        return res.status(400).json({
-            success: false,
-            error: 'ID do curso inválido'
-        });
-    }
+    const id = Number(req.params.id);
 
     const index = courses.findIndex(
         course => Number(course.id) === id
@@ -152,38 +108,25 @@ app.put('/api/courses/:id', (req, res) => {
         });
     }
 
-    const oldCourse = courses[index];
-
-    const updatedCourse = {
-        ...oldCourse,
+    courses[index] = {
+        ...courses[index],
         ...req.body,
-        id: oldCourse.id,
-        views: oldCourse.views || 0
+        id: courses[index].id,
+        views: courses[index].views || 0
     };
 
-    courses[index] = updatedCourse;
-
-    res.json({
+    return res.json({
         success: true,
         message: 'Curso atualizado com sucesso',
-        data: updatedCourse
+        data: courses[index]
     });
 });
 
 
-// ================================
-// EXCLUIR CURSO
-// ================================
-
+// EXCLUIR
 app.delete('/api/courses/:id', (req, res) => {
-    const id = Number(req.params.id);
 
-    if (Number.isNaN(id)) {
-        return res.status(400).json({
-            success: false,
-            error: 'ID do curso inválido'
-        });
-    }
+    const id = Number(req.params.id);
 
     const index = courses.findIndex(
         course => Number(course.id) === id
@@ -196,19 +139,15 @@ app.delete('/api/courses/:id', (req, res) => {
         });
     }
 
-    const deletedCourse = courses.splice(index, 1)[0];
+    const deleted = courses.splice(index, 1)[0];
 
-    res.json({
+    return res.json({
         success: true,
         message: 'Curso excluído com sucesso',
-        data: deletedCourse
+        data: deleted
     });
 });
 
-
-// ================================
-// INICIAR SERVIDOR
-// ================================
 
 app.listen(PORT, () => {
     console.log(`EduRadar API rodando na porta ${PORT}`);
